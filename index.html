@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer">
+    <title>White or Red Wine? – Free Online Wine Tasting Quiz</title>
+    <meta name="description" content="Gewürztraminer. Primitivo. Viognier. Can you tell which grape makes white wine and which makes red? Play the free wine tasting quiz — no sign-up needed.">
+    <link rel="canonical" href="https://whiteorredwine.com/" />
+    <meta property="og:title" content="White or Red Wine? – Free Wine Tasting Quiz">
+    <meta property="og:description" content="Gewürztraminer. Primitivo. Viognier. Tannat. Some are white wines. Some are red. Can you tell them apart? Play free, no sign-up.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://whiteorredwine.com/">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="fonts/Inter-Latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <div>
+                <p class="site-title" id="site-title"></p>
+                <p class="header-tagline" id="header-tagline"></p>
+            </div>
+            <div class="header-right">
+                <div class="lang-switcher">
+                    <button class="lang-btn" data-lang="en">EN</button>
+                    <button class="lang-btn" data-lang="de">DE</button>
+                    <button class="lang-btn" data-lang="fr">FR</button>
+                </div>
+                <a id="more-quizzes-link" href="https://triviaquiz.games" target="_blank" rel="noopener noreferrer" style="font-size:0.82rem;color:var(--gray-text);"></a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- ── Intro ───────────────────────────────────────────── -->
+        <section class="intro">
+            <div class="container">
+                <h1 id="intro-h1"></h1>
+                <p id="intro-para"></p>
+            </div>
+        </section>
+
+        <!-- ── Quiz ────────────────────────────────────────────── -->
+        <section class="quiz-section">
+            <div class="container">
+
+                <!-- Question screen -->
+                <div id="quiz-screen">
+                    <p class="quiz-progress-label">
+                        <span id="q-label-question">Question</span>&nbsp;<span id="q-current">1</span>&nbsp;<span id="q-label-of">of</span>&nbsp;<span id="q-total">10</span>
+                    </p>
+                    <div class="quiz-bar-track">
+                        <div class="quiz-bar-fill" id="q-bar"></div>
+                    </div>
+                    <div class="quiz-card">
+                        <div class="quiz-name" id="q-name">—</div>
+                        <div class="quiz-feedback" id="q-feedback"></div>
+                    </div>
+                    <div class="quiz-answers">
+                        <button class="btn-answer btn-answer--white" id="btn-white"></button>
+                        <button class="btn-answer btn-answer--red"   id="btn-red"></button>
+                    </div>
+                </div>
+
+                <!-- Results screen -->
+                <div id="quiz-results" hidden>
+                    <div class="result-score" id="res-score"></div>
+                    <p class="result-label" id="res-label"></p>
+                    <p class="result-verdict" id="res-verdict"></p>
+                    <ul class="review-list" id="review-list"></ul>
+                    <button class="btn-restart" id="btn-restart"></button>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ── About ───────────────────────────────────────────── -->
+        <section class="about-section">
+            <div class="container">
+                <h2 id="about-title"></h2>
+                <div id="faq-container"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>
+                Part of <a href="https://triviaquiz.games" target="_blank" rel="noopener noreferrer">triviaquiz.games</a>
+                &nbsp;|&nbsp;
+                <a id="imprint-link" href="https://legal.lueders.solutions/en/imprint/" target="_blank" rel="noopener noreferrer"></a>
+                &nbsp;|&nbsp;
+                <a id="privacy-link" href="https://legal.lueders.solutions/en/privacy/web-whiteorredwine/" target="_blank" rel="noopener noreferrer"></a>
+            </p>
+            <p style="margin-top:6px;"><span id="made-by"></span> <a href="https://lueders.app" target="_blank" rel="noopener noreferrer">lueders.app</a></p>
+        </div>
+    </footer>
+
+    <script src="wines.js"></script>
+    <script>
+
+        // ── i18n ──────────────────────────────────────────────────────────────
+        let currentLang = 'en';
+        const t = () => TRANSLATIONS[currentLang];
+
+        function detectLanguage() {
+            const saved = localStorage.getItem('wineQuizLang');
+            if (saved && TRANSLATIONS[saved]) return saved;
+            const browser = (navigator.language || 'en').slice(0, 2).toLowerCase();
+            if (browser === 'de') return 'de';
+            if (browser === 'fr') return 'fr';
+            return 'en';
+        }
+
+        function renderFAQ() {
+            document.getElementById('faq-container').innerHTML = t().faq
+                .map(item => `
+                    <details>
+                        <summary>${item.q}</summary>
+                        <p class="faq-body">${item.a}</p>
+                    </details>`)
+                .join('');
+        }
+
+        // Switching language always restarts the quiz so wine names and UI match
+        function setLanguage(lang) {
+            if (!TRANSLATIONS[lang]) return;
+            currentLang = lang;
+            localStorage.setItem('wineQuizLang', lang);
+            document.documentElement.lang = lang;
+            document.title = t().pageTitle;
+
+            document.querySelectorAll('.lang-btn').forEach(btn =>
+                btn.classList.toggle('active', btn.dataset.lang === lang));
+
+            document.getElementById('site-title').innerHTML          = t().siteTitleHtml;
+            document.getElementById('header-tagline').textContent    = t().headerTagline;
+            document.getElementById('intro-h1').innerHTML            = t().introH1Html;
+            document.getElementById('intro-para').innerHTML          = t().introPara;
+            document.getElementById('q-label-question').textContent  = t().questionOf;
+            document.getElementById('q-label-of').textContent        = t().questionOfSep;
+            document.getElementById('btn-white').innerHTML           = t().btnWhite;
+            document.getElementById('btn-red').innerHTML             = t().btnRed;
+            document.getElementById('res-label').textContent         = t().outOf10;
+            document.getElementById('btn-restart').innerHTML         = t().btnRestart;
+            document.getElementById('about-title').textContent       = t().aboutTitle;
+            document.getElementById('more-quizzes-link').textContent = t().moreQuizzes;
+            document.getElementById('imprint-link').textContent      = t().imprintLink;
+            document.getElementById('privacy-link').textContent      = t().privacyLink;
+            document.getElementById('made-by').textContent           = t().madeBy;
+
+            renderFAQ();
+            startQuiz();
+        }
+
+        // ── Helpers ───────────────────────────────────────────────────────────
+        function shuffle(arr) {
+            const a = [...arr];
+            for (let i = a.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [a[i], a[j]] = [a[j], a[i]];
+            }
+            return a;
+        }
+
+        function generateQuiz(count) {
+            const half = count / 2;
+            const pool = WINE_POOLS[currentLang];
+            const whites = shuffle(pool.white).slice(0, half).map(n => ({ name: n, type: 'white' }));
+            const reds   = shuffle(pool.red).slice(0, half).map(n   => ({ name: n, type: 'red'   }));
+            return shuffle([...whites, ...reds]);
+        }
+
+        // ── DOM refs ──────────────────────────────────────────────────────────
+        const screenEl     = document.getElementById('quiz-screen');
+        const resultsEl    = document.getElementById('quiz-results');
+        const qNameEl      = document.getElementById('q-name');
+        const qCurrentEl   = document.getElementById('q-current');
+        const qTotalEl     = document.getElementById('q-total');
+        const qBarEl       = document.getElementById('q-bar');
+        const feedbackEl   = document.getElementById('q-feedback');
+        const btnWhite     = document.getElementById('btn-white');
+        const btnRed       = document.getElementById('btn-red');
+        const btnRestart   = document.getElementById('btn-restart');
+        const resScoreEl   = document.getElementById('res-score');
+        const resVerdictEl = document.getElementById('res-verdict');
+        const reviewListEl = document.getElementById('review-list');
+
+        const TOTAL = 10;
+        let questions = [], current = 0, score = 0, answers = [];
+
+        const verdict = s => t().verdicts.find(([min]) => s >= min)[1];
+
+        // ── Quiz Logic ────────────────────────────────────────────────────────
+        function startQuiz() {
+            questions = generateQuiz(TOTAL);
+            current = score = 0;
+            answers = [];
+            qTotalEl.textContent = TOTAL;
+            resultsEl.hidden = true;
+            screenEl.hidden  = false;
+            showQuestion();
+        }
+
+        function showQuestion() {
+            const q = questions[current];
+            qNameEl.textContent    = q.name;
+            qCurrentEl.textContent = current + 1;
+            qBarEl.style.width     = `${(current / TOTAL) * 100}%`;
+            feedbackEl.textContent = '';
+            feedbackEl.className   = 'quiz-feedback';
+            btnWhite.disabled      = false;
+            btnRed.disabled        = false;
+        }
+
+        function handleAnswer(guess) {
+            btnWhite.disabled = btnRed.disabled = true;
+            const q  = questions[current];
+            const ok = guess === q.type;
+            if (ok) score++;
+            answers.push({ name: q.name, type: q.type, guess, correct: ok });
+            const typeLabel = q.type === 'white' ? t().typeWhite : t().typeRed;
+            feedbackEl.textContent = ok
+                ? t().correctFeedback(q.name, typeLabel)
+                : t().wrongFeedback(q.name, typeLabel);
+            feedbackEl.className = 'quiz-feedback ' + (ok ? 'quiz-feedback--correct' : 'quiz-feedback--wrong');
+            current++;
+            if (current < TOTAL) setTimeout(showQuestion, 900);
+            else setTimeout(showResults, 1000);
+        }
+
+        function renderReviewList() {
+            reviewListEl.innerHTML = '';
+            answers.forEach(a => {
+                const li = document.createElement('li');
+                li.className = a.correct ? 'r-correct' : 'r-wrong';
+                const badgeLabel = a.type === 'white' ? t().typeWhite : t().typeRed;
+                li.innerHTML = `
+                    <span class="review-name">${a.name}</span>
+                    <span class="review-badge review-badge--${a.type}">${badgeLabel}</span>
+                    <span class="review-icon ${a.correct ? 'review-icon--correct' : 'review-icon--wrong'}">${a.correct ? '✓' : '✗'}</span>
+                `;
+                reviewListEl.appendChild(li);
+            });
+        }
+
+        function showResults() {
+            qBarEl.style.width       = '100%';
+            resScoreEl.textContent   = score;
+            resVerdictEl.textContent = verdict(score);
+            renderReviewList();
+            screenEl.hidden  = true;
+            resultsEl.hidden = false;
+        }
+
+        // ── Event Listeners ───────────────────────────────────────────────────
+        btnWhite.addEventListener('click',   () => handleAnswer('white'));
+        btnRed.addEventListener('click',     () => handleAnswer('red'));
+        btnRestart.addEventListener('click', startQuiz);
+
+        document.querySelectorAll('.lang-btn').forEach(btn =>
+            btn.addEventListener('click', () => setLanguage(btn.dataset.lang)));
+
+        // ── Init ──────────────────────────────────────────────────────────────
+        setLanguage(detectLanguage());
+
+    </script>
+</body>
+</html>
