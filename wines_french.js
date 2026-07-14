@@ -9,8 +9,9 @@
 // QUIZ-KURATIERUNG (2026-07-14):
 // Alle seltenen Lokalsorten, Hybridsorten, Tafeltrauben, Basken-Sorten,
 // Gamay-Mutationen und obskuren Regional-Kreuzungen entfernt.
-// Ziel: nur bekannte AOC-Sorten, die ein Weinenthusiast kennt.
-// Alle ★/★★/★★★-Einträge (irreführende Namen) wurden vollständig beibehalten.
+// Kriterium: Würde ein Weinenthusiast diese Sorte kennen?
+// ★/★★/★★★ (irreführender Name) erhöht den Quiz-Wert, schützt aber nicht vor
+// Entfernung — unbekannte Sorten bleiben draußen, egal ob mit Stern oder ohne.
 
 const FR_APPROVED = {
 

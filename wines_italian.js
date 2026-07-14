@@ -10,9 +10,10 @@
 // QUIZ-KURATIERUNG (2026-07-14):
 // Alle seltenen Lokalsorten, obskuren Regionalsorten und Neuzüchtungen entfernt.
 // Redundante Untervarianten konsolidiert (Lambrusco → di Sorbara, Magliocco → Dolce,
-// Bovale → Sardo, Malvasia Nera Subvarianten, Trebbiano 4 von 6, Malvasia 4 von 7 entfernt).
-// Ziel: nur bekannte DOC/DOCG-Sorten, die ein Weinenthusiast kennt.
-// Alle ★/★★/★★★-Einträge (irreführende Namen) wurden vollständig beibehalten.
+// Bovale → Sardo, Malvasia Nera Subvarianten, 4 von 6 Trebbiano, 4 von 7 Malvasia).
+// Kriterium: Würde ein Weinenthusiast diese Sorte kennen?
+// ★/★★/★★★ (irreführender Name) erhöht den Quiz-Wert, schützt aber nicht vor
+// Entfernung — unbekannte Sorten bleiben draußen, egal ob mit Stern oder ohne.
 
 const IT_APPROVED = {
 
