@@ -49,6 +49,12 @@
         <section class="quiz-section">
             <div class="container">
 
+                <!-- Category selector -->
+                <div class="cat-switcher" id="cat-switcher">
+                    <button class="cat-btn active" data-cat="de-approved" id="cat-btn-de-approved"></button>
+                    <button class="cat-btn"        data-cat="classic"     id="cat-btn-classic"></button>
+                </div>
+
                 <!-- Question screen -->
                 <div id="quiz-screen">
                     <p class="quiz-progress-label">
@@ -101,11 +107,13 @@
         </div>
     </footer>
 
+    <script src="wines_german.js"></script>
     <script src="wines.js"></script>
     <script>
 
         // ── i18n ──────────────────────────────────────────────────────────────
         let currentLang = 'en';
+        let currentCategory = 'de-approved';
         const t = () => TRANSLATIONS[currentLang];
 
         function detectLanguage() {
@@ -154,7 +162,16 @@
             document.getElementById('privacy-link').textContent      = t().privacyLink;
             document.getElementById('made-by').textContent           = t().madeBy;
 
+            document.getElementById('cat-btn-de-approved').textContent = t().catDeApproved;
+            document.getElementById('cat-btn-classic').textContent     = t().catClassic;
             renderFAQ();
+            startQuiz();
+        }
+
+        function setCategory(cat) {
+            currentCategory = cat;
+            document.querySelectorAll('.cat-btn').forEach(btn =>
+                btn.classList.toggle('active', btn.dataset.cat === cat));
             startQuiz();
         }
 
@@ -168,9 +185,13 @@
             return a;
         }
 
+        function getPool() {
+            return currentCategory === 'de-approved' ? DE_APPROVED : WINE_POOLS[currentLang];
+        }
+
         function generateQuiz(count) {
             const half = count / 2;
-            const pool = WINE_POOLS[currentLang];
+            const pool = getPool();
             const whites = shuffle(pool.white).slice(0, half).map(n => ({ name: n, type: 'white' }));
             const reds   = shuffle(pool.red).slice(0, half).map(n   => ({ name: n, type: 'red'   }));
             return shuffle([...whites, ...reds]);
@@ -265,6 +286,9 @@
 
         document.querySelectorAll('.lang-btn').forEach(btn =>
             btn.addEventListener('click', () => setLanguage(btn.dataset.lang)));
+
+        document.querySelectorAll('.cat-btn').forEach(btn =>
+            btn.addEventListener('click', () => setCategory(btn.dataset.cat)));
 
         // ── Init ──────────────────────────────────────────────────────────────
         setLanguage(detectLanguage());
