@@ -12,6 +12,7 @@
 // Kriterium: Würde ein Weinenthusiast diese Sorte kennen?
 // ★/★★/★★★ (irreführender Name) erhöht den Quiz-Wert, schützt aber nicht vor
 // Entfernung — unbekannte Sorten bleiben draußen, egal ob mit Stern oder ohne.
+// Stand: 51 Rotwein- + 66 Weißweinsorten = 117 Sorten gesamt.
 
 const FR_APPROVED = {
 
