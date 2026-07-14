@@ -105,13 +105,11 @@ const FR_APPROVED = {
         "Mauzac",                 // Gaillac, Limoux (Blanquette de Limoux) — 1.991 ha
         "Mauzac Rose",            // ★★ 'Rose' im Namen — trotzdem WEISSW!
         "Melon de Bourgogne",     // Loire — die Muscadet-Traube — 12.364 ha
-        "Merlot Blanc",           // ★★★ 'Merlot' → alle denken sofort ROT — ist WEISS! — 54 ha
         "Mondeuse Blanche",       // ★★ 'Mondeuse' kennt man als roten Savoie-Wein — weiße Variante
         "Müller-Thurgau",         // Elsass (in FR zugelassen)
         "Muscadelle",             // ★ Bordeaux, Sauternes — klingt wie Muscat — 'cadelle' = neutral
         "Muscat d'Alexandrie",    // Roussillon, Languedoc — 2.610 ha
         "Muscat blanc à petits grains", // Elsass, Beaumes-de-Venise, Frontignan — 7.620 ha
-        "Muscat rose à petits grains",  // ★★ 'Rose' im Namen — Weißweinsorte!
         "Muscat rouge à petits grains", // ★★★ 'Rouge' = rot — trotzdem WEISSW klassifiziert! — 314 ha
         "Muskat Ottonel",         // Elsass — nur dort zugelassen
         "Ondenc",                 // Südwesten (Gaillac)
