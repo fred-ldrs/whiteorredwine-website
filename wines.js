@@ -32,7 +32,7 @@ const WINE_POOLS = {
             "Lagrein",           // Alto Adige red, deep and full-bodied
             "Sagrantino",        // Umbria's most tannic native red
             "Xinomavro",         // Northern Greece — 'acid-black' red
-            "Blaufränkisch",     // Austria — 'blau' means blue
+            "Negroamaro",        // Puglia, Italy — 'negro' = black, 'amaro' = bitter
             "Primitivo",         // Puglia's powerful red, related to Zinfandel
             "Teroldego",         // Trentino red, Campo Rotaliano
             "Montepulciano",     // Central Italy red grape (d'Abruzzo)
@@ -83,7 +83,7 @@ const WINE_POOLS = {
             "Corvina",           // Valpolicella / Amarone grape
             "Tannat",            // Madiran — extremely tannic
             "Carménère",         // Chile's signature red
-            "Pinotage",          // South Africa — Pinot Noir × Cinsault
+            "Merlot",            // Bordeaux's most-planted red — Pomerol, Saint-Émilion
             "Aglianico",         // Southern Italy — 'Barolo of the South'
             "Nero d'Avola",      // Sicily — 'nero' means black
         ],
@@ -106,10 +106,10 @@ const WINE_POOLS = {
             "Melon de Bourgogne",// Loire — Muscadet's grape
             "Aligoté",           // Burgundy secondary white
             "Rolle",             // Provence name for Vermentino
-            "Gewürztraminer",    // Alsace aromatic white
+            "Muscat",            // Alsace & Rhône — Muscat d'Alsace, Beaumes-de-Venise
             "Auxerrois",         // Alsace & Lorraine white
             "Maccabeu",          // Roussillon & Languedoc white
-            "Vermentino",        // Corsica & Provence white
+            "Sémillon",          // Bordeaux white — Sauternes & Pessac-Léognan
         ],
         red: [
             "Carignan",          // Languedoc & Roussillon backbone red
@@ -124,12 +124,12 @@ const WINE_POOLS = {
             "Pineau d'Aunis",    // Loire — 'Pineau' hints at white
             "Fer Servadou",      // Southwest France — Marcillac & Entraygues
             "Tannat",            // Madiran & Irouléguy — 'tannin' grape
-            "Carménère",         // Chile (originally a Bordeaux variety)
-            "Pinotage",          // South Africa — Pinot Noir × Cinsault
-            "Touriga Nacional",  // Portugal's top red grape
-            "Xinomavro",         // Northern Greece — 'acid-black'
-            "Sagrantino",        // Umbria's most tannic native red
-            "Lagrein",           // Alto Adige / South Tyrol red
+            "Côt",               // Cahors & Loire — French name for Malbec
+            "Jurançon Noir",     // Southwest France — tricky: Jurançon is a white wine!
+            "Pinot Meunier",     // Champagne region — 'meunier' = miller
+            "Grolleau",          // Loire — Anjou, Rosé d'Anjou
+            "Duras",             // Gaillac, Southwest France
+            "Abouriou",          // Southwest France — rare native red
         ],
     },
 };
