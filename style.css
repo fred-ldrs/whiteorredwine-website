@@ -146,6 +146,7 @@ header .container {
 
 /* ── Difficulty Switcher ─────────────────────────── */
 .diff-switcher { display: flex; gap: 6px; margin-bottom: 22px; flex-wrap: wrap; }
+.diff-switcher[hidden] { display: none; }
 .diff-btn {
     background: transparent;
     border: 1px solid var(--muted);
