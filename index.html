@@ -112,6 +112,7 @@
                     <button class="cat-btn"        data-cat="de-approved"   id="cat-btn-de-approved"></button>
                     <button class="cat-btn"        data-cat="fr-approved"   id="cat-btn-fr-approved"></button>
                     <button class="cat-btn"        data-cat="it-approved"   id="cat-btn-it-approved"></button>
+                    <button class="cat-btn"        data-cat="es-approved"   id="cat-btn-es-approved"></button>
                     <button class="cat-btn"        data-cat="world-approved" id="cat-btn-world-approved"></button>
                 </div>
 
@@ -178,6 +179,7 @@
     <script src="wines_german.js"></script>
     <script src="wines_french.js"></script>
     <script src="wines_italian.js"></script>
+    <script src="wines_spanish.js"></script>
     <script src="wines.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
@@ -239,6 +241,7 @@
             document.getElementById('cat-btn-de-approved').textContent   = t().catDeApproved;
             document.getElementById('cat-btn-fr-approved').textContent   = t().catFrApproved;
             document.getElementById('cat-btn-it-approved').textContent   = t().catItApproved;
+            document.getElementById('cat-btn-es-approved').textContent   = t().catEsApproved;
             document.getElementById('cat-btn-classic').textContent       = t().catClassic;
             document.getElementById('cat-btn-world-approved').textContent = t().catWorldApproved;
             document.getElementById('map-title').textContent    = t().mapTitle;
@@ -282,8 +285,8 @@
                 return out;
             };
             return {
-                white: merge([topN(DE_APPROVED.white), topN(FR_APPROVED.white), topN(IT_APPROVED.white)]),
-                red:   merge([topN(DE_APPROVED.red),   topN(FR_APPROVED.red),   topN(IT_APPROVED.red)]),
+                white: merge([topN(DE_APPROVED.white), topN(FR_APPROVED.white), topN(IT_APPROVED.white), topN(ES_APPROVED.white)]),
+                red:   merge([topN(DE_APPROVED.red),   topN(FR_APPROVED.red),   topN(IT_APPROVED.red),   topN(ES_APPROVED.red)]),
             };
         }
 
@@ -295,8 +298,8 @@
                 return out;
             };
             return {
-                white: merge([DE_APPROVED.white, FR_APPROVED.white, IT_APPROVED.white]),
-                red:   merge([DE_APPROVED.red,   FR_APPROVED.red,   IT_APPROVED.red]),
+                white: merge([DE_APPROVED.white, FR_APPROVED.white, IT_APPROVED.white, ES_APPROVED.white]),
+                red:   merge([DE_APPROVED.red,   FR_APPROVED.red,   IT_APPROVED.red,   ES_APPROVED.red]),
             };
         }
 
@@ -304,6 +307,7 @@
             if (currentCategory === 'de-approved')    return DE_APPROVED;
             if (currentCategory === 'fr-approved')    return FR_APPROVED;
             if (currentCategory === 'it-approved')    return IT_APPROVED;
+            if (currentCategory === 'es-approved')    return ES_APPROVED;
             if (currentCategory === 'world-approved') return buildWorldPool();
             return buildClassicPool();
         }

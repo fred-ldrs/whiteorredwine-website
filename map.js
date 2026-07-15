@@ -3,7 +3,7 @@
     'use strict';
 
     // Fixed viewBox dimensions
-    const VW = 860, VH = 585;
+    const VW = 860, VH = 620;
 
     // ISO 3166-1 numeric IDs of European countries (matching world-atlas)
     const EUROPE_IDS = new Set([
@@ -58,6 +58,7 @@
         250: 'fr-approved',  // France
         276: 'de-approved',  // Germany
         380: 'it-approved',  // Italy
+        724: 'es-approved',  // Spain
     };
 
     const TOPO_URL = 'https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json';
@@ -73,9 +74,9 @@
             .attr('width', '100%');
 
         const projection = d3.geoAzimuthalEqualArea()
-            .rotate([-15, -52, 0])
+            .rotate([-10, -50, 0])
             .translate([VW / 2, VH / 2])
-            .scale(VW * 1.12)
+            .scale(VW * 0.90)
             .clipAngle(180 - 1e-3);
 
         const pathGen = d3.geoPath().projection(projection);
