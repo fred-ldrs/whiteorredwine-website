@@ -12,7 +12,8 @@
 // Kriterium: Würde ein Weinenthusiast diese Sorte kennen?
 // ★/★★/★★★ (irreführender Name) erhöht den Quiz-Wert, schützt aber nicht vor
 // Entfernung — unbekannte Sorten bleiben draußen, egal ob mit Stern oder ohne.
-// Stand: 51 Rotwein- + 66 Weißweinsorten = 117 Sorten gesamt.
+// Stand: 120 Rotwein- + 117 Weißweinsorten = 237 Sorten gesamt
+// davon 51 Rot + 66 Weiß mit ha-Daten (Normal/Schwer), 69 Rot + 51 Weiß Expert-Pool (ha = 0).
 
 const FR_APPROVED = {
 
@@ -69,6 +70,76 @@ const FR_APPROVED = {
         { name: "Terret Noir",                 ha:   264 }, // Languedoc, Provence
         { name: "Tibouren",                    ha:   443 }, // Provence — bekannt für Rosé
         { name: "Trousseau",                   ha:   172 }, // Jura
+        // ── Expert-Pool: alle weiteren offiziell erfassten Rotweinsorten ─────
+        { name: "Arrouya",                     ha:     0 }, // Baskenland — seltene Lokalsorte
+        { name: "Aubun",                       ha:     0 }, // ★ Languedoc — klingt neutral, ROT
+        { name: "Bachet Noir",                 ha:     0 }, // Burgund — sehr seltene Sorte
+        { name: "Barbaroux",                   ha:     0 }, // ★ Provence — Eigenname
+        { name: "Béclan",                      ha:     0 }, // Dauphiné — seltene Sorte
+        { name: "Béquignol",                   ha:     0 }, // Bordeaux — alte seltene Sorte
+        { name: "Bouchalès",                   ha:     0 }, // Südwest-Frankreich — Lokalsorte
+        { name: "Bouillet",                    ha:     0 }, // Bourbonnais — seltene Sorte
+        { name: "Bouteillan Noir",             ha:     0 }, // ★ Provence — klingt neutral
+        { name: "Braquet Noir",                ha:     0 }, // ★ Nizza (Bellet AOC) — klingt neutral
+        { name: "Brun Argenté",               ha:     0 }, // ★★ 'Brun' = braun/dunkel — ROT
+        { name: "Carcajolo Noir",              ha:     0 }, // ★ Korsika — klingt neutral
+        { name: "Castets",                     ha:     0 }, // Bordeaux — sehr seltene Sorte
+        { name: "Chambourcin",                 ha:     0 }, // Hybrid — Westfrankreich
+        { name: "Chatus",                      ha:     0 }, // ★ Ardèche — klingt neutral, ROT
+        { name: "Chenanson",                   ha:     0 }, // Languedoc-Roussillon — Züchtung
+        { name: "Colobel",                     ha:     0 }, // Hybrid — Färbertraube
+        { name: "Couderc Noir",                ha:     0 }, // ★ Hybrid — Personenname
+        { name: "Courbu Noir",                 ha:     0 }, // ★★ Südwesten — 'Courbu' kennt man als WEISSWEIN
+        { name: "Egiodola",                    ha:     0 }, // Südwest-Frankreich — Züchtung
+        { name: "Ekigaïna",                    ha:     0 }, // Baskenland — Lokalsorte
+        { name: "Étraire de la Dui",           ha:     0 }, // ★ Isère — seltener okzitanischer Name
+        { name: "Feunate",                     ha:     0 }, // Baskenland — seltene Lokalsorte
+        { name: "Florental",                   ha:     0 }, // INRAE-Züchtung
+        { name: "Franc Noir de la Haute-Saône",ha:     0 }, // ★ 'Franc' klingt weiß-assoziiert — ist ROT
+        { name: "Fuella",                      ha:     0 }, // ★ Provence — klingt neutral
+        { name: "Gamay de Bouze",              ha:     0 }, // Burgund — Gamay-Mutation
+        { name: "Gamay de Chaudenay",          ha:     0 }, // Burgund — Gamay-Mutation
+        { name: "Gamay Fréaux",                ha:     0 }, // Gamay-Mutation
+        { name: "Ganson",                      ha:     0 }, // Savoie — seltene Lokalsorte
+        { name: "Garonnet",                    ha:     0 }, // Bordeaux — alte Sorte
+        { name: "Gascon",                      ha:     0 }, // ★ Südwest-Frankreich — geographischer Name
+        { name: "Gouget Noir",                 ha:     0 }, // ★ Burgund — klingt neutral
+        { name: "Gramon",                      ha:     0 }, // Savoie — seltene Lokalsorte
+        { name: "Grassen",                     ha:     0 }, // Savoie — seltene Lokalsorte
+        { name: "Joubertin",                   ha:     0 }, // ★ Savoie — Personenname, ROT
+        { name: "Landal Noir",                 ha:     0 }, // Hybrid
+        { name: "Léon Millot",                 ha:     0 }, // ★ Hybrid — Personenname
+        { name: "Lival",                       ha:     0 }, // Hybrid
+        { name: "Lledoner Pelut",              ha:     0 }, // ★ Roussillon — Grenache-Verwandter
+        { name: "Mancin",                      ha:     0 }, // Landes — seltene Sorte
+        { name: "Maréchal Foch",               ha:     0 }, // ★ Hybrid — Militärtitel als Name
+        { name: "Mérille",                     ha:     0 }, // Südwest-Frankreich — seltene Sorte
+        { name: "Milgranet",                   ha:     0 }, // Gaillac — alte seltene Sorte
+        { name: "Mollard",                     ha:     0 }, // ★ Savoie — klingt neutral
+        { name: "Monerac",                     ha:     0 }, // ★ klingt neutral, ROT
+        { name: "Morrastel",                   ha:     0 }, // ★ Languedoc — = Graciano, klingt neutral
+        { name: "Mourvaison",                  ha:     0 }, // ★ Mourvèdre-Verwandter — klingt neutral
+        { name: "Mouyssaguès",                 ha:     0 }, // Rouergue — seltene Sorte
+        { name: "Muresconu",                   ha:     0 }, // Korsika — seltene Lokalsorte
+        { name: "Noir de Listan",              ha:     0 }, // ★★ 'Noir' = schwarz → ROT ✓, Listan = neutral
+        { name: "Noir Fleurien",               ha:     0 }, // ★★ 'Noir' = schwarz — ROT ✓
+        { name: "Oberlin Noir",                ha:     0 }, // ★ Hybrid — Personenname
+        { name: "Plant Droit",                 ha:     0 }, // ★ 'Droit' = gerade — klingt neutral
+        { name: "Plantet",                     ha:     0 }, // Hybrid — Färbertraube
+        { name: "Portan",                      ha:     0 }, // ★ Hybrid — klingt neutral
+        { name: "Prunelard",                   ha:     0 }, // ★ Südwest-Frankreich — 'Prunelle' = Schlehe
+        { name: "Ribol",                       ha:     0 }, // Aveyron — seltene Lokalsorte
+        { name: "Roublot",                     ha:     0 }, // Bourgogne — seltene Sorte
+        { name: "Rubilande",                   ha:     0 }, // ★★ Hybrid — 'rubi' = rubinrot → ROT ✓
+        { name: "Segalin",                     ha:     0 }, // INRAE-Züchtung
+        { name: "Seinoir",                     ha:     0 }, // Hybrid — Züchtung
+        { name: "Semebat",                     ha:     0 }, // Aveyron — seltene Sorte
+        { name: "Servanin",                    ha:     0 }, // Savoie — seltene Sorte
+        { name: "Téoulier",                    ha:     0 }, // Provence — seltene Sorte
+        { name: "Tressot",                     ha:     0 }, // ★ Burgund — klingt neutral
+        { name: "Valdiguié",                   ha:     0 }, // ★ Südwest-Frankreich — neutraler Name
+        { name: "Varousset",                   ha:     0 }, // Aveyron — seltene Sorte
+        { name: "Villard Noir",                ha:     0 }, // Hybrid — früher weit verbreitet
     ],
 
     // ── Weißweinsorten — Anbaufläche FR (FranceAgriMer 2023, 0 = keine Angabe)
@@ -139,5 +210,57 @@ const FR_APPROVED = {
         { name: "Verdesse",                         ha:     0 }, // Savoie
         { name: "Vermentino",                       ha:  3569 }, // Provence, Languedoc, Korsika
         { name: "Viognier",                         ha:  4395 }, // Condrieu, Côte-Rôtie, Languedoc
+        // ── Expert-Pool: alle weiteren offiziell erfassten Weißweinsorten ────
+        { name: "Aranel",                           ha:     0 }, // INRAE-Züchtung
+        { name: "Arbane",                           ha:     0 }, // ★ Champagne — sehr seltene alte Sorte
+        { name: "Arriloba",                         ha:     0 }, // Baskenland — Lokalsorte
+        { name: "Arrufiat",                         ha:     0 }, // Baskenland — Lokalsorte
+        { name: "Aubin Blanc",                      ha:     0 }, // Lothringen — alte Sorte
+        { name: "Aubin Vert",                       ha:     0 }, // ★★ 'Vert' = grün — WEISS ✓
+        { name: "Baroque",                          ha:     0 }, // ★ Tursan — Stilbezeichnung als Rebname
+        { name: "Biancu Gentile",                   ha:     0 }, // ★★ Korsika — 'Biancu' = weiß ✓
+        { name: "Blanc Dame",                       ha:     0 }, // ★★ 'Blanc' = weiß — WEISS ✓
+        { name: "Camaralet de Lasseube",            ha:     0 }, // ★ Jurançon — langer okzitanischer Name
+        { name: "Carcajolo Blanc",                  ha:     0 }, // ★★ 'Carcajolo' kennt man als ROT — weiße Variante
+        { name: "Clarin",                           ha:     0 }, // ★ klingt neutral — WEISS
+        { name: "Claverie",                         ha:     0 }, // Südwest-Frankreich — seltene Sorte
+        { name: "Codivarta",                        ha:     0 }, // Korsika — Lokalsorte
+        { name: "Colombaud",                        ha:     0 }, // Charentes — Lokalsorte
+        { name: "Crouchen",                         ha:     0 }, // ★ Südwest-Frankreich — klingt neutral
+        { name: "Elbling",                          ha:     0 }, // Mosel/Elsass — in FR zugelassen
+        { name: "Folignan",                         ha:     0 }, // INRAE-Züchtung
+        { name: "Genovèse",                         ha:     0 }, // ★ Korsika — 'Genovèse' = Genuesin
+        { name: "Goldriesling",                     ha:     0 }, // ★ Sachsen/Elsass — Riesling-Abkömmling
+        { name: "Graisse",                          ha:     0 }, // ★ Armagnac — 'Graisse' = Fett
+        { name: "Gringet",                          ha:     0 }, // ★ Savoie (Ayze) — ungewöhnlicher Name
+        { name: "Gros Vert",                        ha:     0 }, // ★★ 'Vert' = grün — WEISS ✓
+        { name: "Knipperlé",                        ha:     0 }, // ★ Elsass — alter elsässischer Name
+        { name: "Lauzet",                           ha:     0 }, // Haute-Provence — seltene Sorte
+        { name: "Liliorila",                        ha:     0 }, // ★ Korsika — exotischer Name
+        { name: "Mayorquin",                        ha:     0 }, // ★ klingt nach Mallorca — WEISS
+        { name: "Merlot Blanc",                     ha:     0 }, // ★★★ 'Merlot' → jeder denkt ROT, ist aber WEISS!
+        { name: "Meslier-Saint-François",           ha:     0 }, // ★ Champagne — langer Name
+        { name: "Molette",                          ha:     0 }, // ★ Savoie, Bugey — klingt neutral
+        { name: "Montils",                          ha:     0 }, // Charentes — seltene Sorte
+        { name: "Muscat Cendré",                    ha:     0 }, // ★★ 'Cendré' = aschgrau — klingt dunkel, WEISS
+        { name: "Muscat rose à petits grains",      ha:     0 }, // ★★★ 'Rose' im Namen — Elsass — gilt als WEISS!
+        { name: "Oeillade Blanche",                 ha:     0 }, // ★★ 'Oeillade' kennt man als ROT — weiße Variante
+        { name: "Paga Debiti",                      ha:     0 }, // ★ Südwest — 'zahlt Schulden', WEISS
+        { name: "Pascal Blanc",                     ha:     0 }, // ★★ 'Pascal' klingt neutral — Provence, WEISS
+        { name: "Perdea",                           ha:     0 }, // Südwest-Frankreich — seltene Sorte
+        { name: "Petit Meslier",                    ha:     0 }, // ★ Champagne — sehr seltene Sorte
+        { name: "Précoce Bousquet",                 ha:     0 }, // ★ früh reifend — Eigenname
+        { name: "Raffiat de Moncade",               ha:     0 }, // ★ Béarn — langer okzitanischer Name
+        { name: "Ravat Blanc",                      ha:     0 }, // ★ Hybrid — Personenname
+        { name: "Rayon d'Or",                       ha:     0 }, // ★★ 'Goldener Strahl' — Hybrid, WEISS
+        { name: "Riminèse",                         ha:     0 }, // Languedoc — seltene Sorte
+        { name: "Roussette d'Ayze",                 ha:     0 }, // ★★ 'Roussette' klingt rötlich — WEISS (Savoie)
+        { name: "Sacy",                             ha:     0 }, // ★ Burgund — klingt neutral, WEISS
+        { name: "Saint-Pierre Doré",                ha:     0 }, // ★ 'Doré' = golden — Heiligenname + Farbe
+        { name: "Select",                           ha:     0 }, // ★ neutraler Handelsname — WEISS
+        { name: "Servant",                          ha:     0 }, // ★ Beaujolais — 'Servant' = Diener
+        { name: "Seyval Blanc",                     ha:     0 }, // ★ Hybrid — 'Blanc' ✓
+        { name: "Valérien",                         ha:     0 }, // ★ Savoie — Personenname
+        { name: "Villard Blanc",                    ha:     0 }, // ★ Hybrid — Personenname
     ],
 };

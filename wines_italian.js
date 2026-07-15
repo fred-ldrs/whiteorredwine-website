@@ -14,7 +14,8 @@
 // Kriterium: Würde ein Weinenthusiast diese Sorte kennen?
 // ★/★★/★★★ (irreführender Name) erhöht den Quiz-Wert, schützt aber nicht vor
 // Entfernung — unbekannte Sorten bleiben draußen, egal ob mit Stern oder ohne.
-// Stand: 83 Rotwein- + 70 Weißweinsorten = 153 Sorten gesamt.
+// Stand: 148 Rotwein- + 135 Weißweinsorten = 283 Sorten gesamt.
+// davon 83 Rot + 70 Weiß mit ha-Daten (Normal/Schwer), 65 Rot + 65 Weiß Expert-Pool (ha = 0).
 
 const IT_APPROVED = {
 
@@ -103,6 +104,85 @@ const IT_APPROVED = {
         { name: "Vernaccia Nera",        ha:     0 }, // ★★★ Marken — 'Vernaccia' = WEISS, NERA = ROT
         { name: "Vernatsch",             ha:  2000 }, // Südtirol — deutsche Bezeichnung für Schiava
         { name: "Vespolina",             ha:   300 }, // Piemont — Ghemme, Gattinara
+        // ── Expert-Pool: alle weiteren offiziell erfassten Rotweinsorten ─────
+        { name: "Abbuoto",               ha:     0 }, // Latium — seltene Sorte
+        { name: "Abrusco",               ha:     0 }, // Toskana — Färbertraube
+        { name: "Albaranzeuli Nero",     ha:     0 }, // Sardinien — Lokalsorte
+        { name: "Albarossa",             ha:     0 }, // Piemont — Kreuzung Barbera × Chatus
+        { name: "Alicante",              ha:     0 }, // ★ Toskana — = Grenache, geographischer Name
+        { name: "Alicante Bouschet",     ha:     0 }, // Toskana — Färbertraube
+        { name: "Ancellotta",            ha:     0 }, // Emilia-Romagna, Lombardei — Färbertraube
+        { name: "Avana",                 ha:     0 }, // Piemont — seltene Sorte
+        { name: "Avarengo",              ha:     0 }, // Piemont — seltene Sorte
+        { name: "Barbera Sarda",         ha:     0 }, // ★ Sardinien — 'Barbera' → Piemont-Assoziation
+        { name: "Barsaglina",            ha:     0 }, // Toskana — seltene Lokalsorte
+        { name: "Bombino Nero",          ha:     0 }, // ★★ Apulien — 'Bombino' kennt man als Weißwein (Bombino Bianco)!
+        { name: "Bonamico",              ha:     0 }, // ★ Toskana — 'guter Freund', klingt neutral
+        { name: "Bonda",                 ha:     0 }, // Aostatal — seltene Sorte
+        { name: "Bovale Grande",         ha:     0 }, // Sardinien — verwandt mit Bovale Sardo
+        { name: "Bracciola Nera",        ha:     0 }, // ★★ Toskana — 'Bracciola' = Kotelette!, ROT
+        { name: "Caddiu",                ha:     0 }, // Sardinien — Lokalsorte
+        { name: "Cagnulari",             ha:     0 }, // Sardinien — Lokalsorte
+        { name: "Caloria",               ha:     0 }, // Toskana — seltene Sorte
+        { name: "Canina Nera",           ha:     0 }, // ★★ Toskana — 'Canina' = hündisch?, ROT
+        { name: "Caricagiola",           ha:     0 }, // Sardinien — Lokalsorte
+        { name: "Castiglione",           ha:     0 }, // ★ Kalabrien — geographischer Name
+        { name: "Catanese Nero",         ha:     0 }, // ★★ Sizilien — 'Catanese' = aus Catania, ROT
+        { name: "Cesanese Comune",       ha:     0 }, // Latium — häufigere Cesanese-Variante
+        { name: "Chatus",                ha:     0 }, // Piemont — = Abrusco (Toskana)
+        { name: "Cjanorie",              ha:     0 }, // ★ Friaul — rätoromanischer Name
+        { name: "Colombana Nera",        ha:     0 }, // ★★ Toskana — 'Colombana' klingt weiß, NERA = ROT
+        { name: "Corinto Nero",          ha:     0 }, // ★★ Sizilien — 'Corinto' = Korinth, NERO = ROT
+        { name: "Cornalin d'Aoste",      ha:     0 }, // ★ Aostatal — = Rouge du Pays
+        { name: "Cordenossa",            ha:     0 }, // Friaul — seltene Sorte
+        { name: "Crovassa",              ha:     0 }, // Aostatal — seltene Lokalsorte
+        { name: "Dindarella",            ha:     0 }, // ★ Venetien — Valpolicella-Sorte
+        { name: "Durasa",                ha:     0 }, // Piemont — seltene Sorte
+        { name: "Enantio",               ha:     0 }, // ★ Südtirol-Trentino — griechischer Name
+        { name: "Foglia Tonda",          ha:     0 }, // ★★ Toskana — 'rundes Blatt', klingt neutral, ROT
+        { name: "Forgiarin",             ha:     0 }, // Friaul — seltene Sorte
+        { name: "Fortana",               ha:     0 }, // ★ Emilia-Romagna — = Uva d'Oro
+        { name: "Fumin",                 ha:     0 }, // ★ Aostatal — 'fumig', klingt neutral
+        { name: "Girò",                  ha:     0 }, // ★ Sardinien — 'Girò' klingt neutral, ROT
+        { name: "Groppello di Mocasina", ha:     0 }, // Lombardei — Gardasee-Variante
+        { name: "Groppello di Santo Stefano", ha: 0 }, // Lombardei — Gardasee-Variante
+        { name: "Grosso Nero",           ha:     0 }, // ★★ Sizilien — 'Grosso' = groß, 'Nero' = schwarz, ROT ✓
+        { name: "Guarnaccia",            ha:     0 }, // ★★ Kampanien — = Grenache (ROT); cf. Guarnaccia Bianca
+        { name: "Incrocio Terzi N. 1",   ha:     0 }, // ★ Lombardei — Kreuzungsbezeichnung
+        { name: "Lambrusca di Alessandria", ha:  0 }, // ★★ Emilia-Romagna — 'Lambrusca' klingt neutral
+        { name: "Lambrusco Grasparossa", ha:     0 }, // ★★ Emilia-Romagna — 'Grasparossa' = roter Stängel
+        { name: "Lambrusco Maestri",     ha:     0 }, // ★ Emilia-Romagna — 'Maestri' = Meister
+        { name: "Lambrusco Marani",      ha:     0 }, // Emilia-Romagna, Lombardei
+        { name: "Lambrusco Montericco",  ha:     0 }, // Emilia-Romagna — seltene Sorte
+        { name: "Lambrusco Oliva",       ha:     0 }, // ★★ Emilia-Romagna — 'Oliva' klingt weiß/grün!
+        { name: "Lambrusco Salamino",    ha:     0 }, // ★★ Emilia-Romagna — 'Salamino' = kleiner Salami!
+        { name: "Lambrusco Viadanese",   ha:     0 }, // Lombardei, Emilia-Romagna
+        { name: "Magliocco Canino",      ha:     0 }, // ★ Kalabrien — 'Canino' = hündisch
+        { name: "Maiolica",              ha:     0 }, // ★ Abruzzen, Marken — Keramik als Rebname!
+        { name: "Malbo Gentile",         ha:     0 }, // ★★ Emilia-Romagna — 'Gentile' klingt weiß-assoziiert
+        { name: "Malvasia Nera di Basilicata", ha: 0 }, // ★★ Basilikata — 'Malvasia' → Weiß, NERA = ROT
+        { name: "Malvasia Nera di Brindisi",   ha: 0 }, // ★★ Apulien — 'Malvasia' → Weiß, NERA = ROT
+        { name: "Malvasia Nera di Lecce",      ha: 0 }, // ★★ Apulien — 'Malvasia' → Weiß, NERA = ROT
+        { name: "Marsigliana Nera",      ha:     0 }, // ★★ Kalabrien — 'Marsigliana' klingt neutral, NERA = ROT
+        { name: "Mammolo",               ha:     0 }, // ★ Toskana — 'Mammolo' = Veilchen (!)
+        { name: "Mayolet",               ha:     0 }, // ★ Aostatal — 'Mayolet' klingt neutral
+        { name: "Mazzese",               ha:     0 }, // Toskana — seltene Sorte
+        { name: "Negrara",               ha:     0 }, // ★★ Südtirol-Trentino — 'Negrara' = schwärzlich, ROT ✓
+        { name: "Neyret",                ha:     0 }, // ★ Aostatal, Piemont — neutraler Name
+        { name: "Nocera",                ha:     0 }, // ★ Kalabrien, Sizilien — Stadtname, ROT
+        { name: "Notardomenico",         ha:     0 }, // ★ Apulien — 'Notar Domenico' = Notarsname!
+        { name: "Oseleta",               ha:     0 }, // ★ Venetien — Valpolicella-Sorte
+        { name: "Pascale",               ha:     0 }, // ★ Sardinien — 'Pascale' = Ostern, klingt neutral
+        { name: "Piculti Neri",          ha:     0 }, // ★★ Friaul — 'Piculit' klingt neutral, NERI = ROT
+        { name: "Pollera Nera",          ha:     0 }, // ★★ Ligurien — 'Pollera' klingt neutral, NERA = ROT
+        { name: "Prëmetta",              ha:     0 }, // ★ Aostatal — rätoromanischer Name
+        { name: "Prunesta",              ha:     0 }, // ★ Kalabrien — 'Prunesta' klingt neutral
+        { name: "Quagliano",             ha:     0 }, // ★ Piemont — 'Quagliano' = Wachtel!
+        { name: "Raboso Veronese",       ha:     0 }, // ★★ Venetien — 'Raboso' = zornig, ROT
+        { name: "Sciascinoso",           ha:     0 }, // ★ Kampanien — = Olivella Nera
+        { name: "Somarello",             ha:     0 }, // ★ Apulien — 'Somarello' = kleiner Esel
+        { name: "Uvalino",               ha:     0 }, // Piemont — seltene Sorte
+        { name: "Vien de Nus",           ha:     0 }, // ★ Aostatal — franko-provenzalischer Name
     ],
 
     // ── Weißweinsorten — Anbaufläche IT (ISTAT ca. 2020, 0 = keine Angabe)
@@ -177,5 +257,72 @@ const IT_APPROVED = {
         { name: "Viognier",                      ha:   500 }, // Toskana
         { name: "Vitovska",                      ha:     0 }, // Friaul-Julisch Venetien — Karst
         { name: "Zibibbo",                       ha:  1000 }, // ★ Sizilien — Pantelleria; arabischer Name, WEISS
+        // ── Expert-Pool: alle weiteren offiziell erfassten Weißweinsorten ────
+        { name: "Albanello Bianco",              ha:     0 }, // ★ Sizilien — 'Albanello' klingt neutral
+        { name: "Albaranzeuli Bianco",           ha:     0 }, // Sardinien — Lokalsorte
+        { name: "Albarola",                      ha:     0 }, // Ligurien, Sizilien, Toskana
+        { name: "Alionza",                       ha:     0 }, // Emilia-Romagna — seltene Sorte
+        { name: "Arvesiniadu",                   ha:     0 }, // Sardinien — Lokalsorte
+        { name: "Asprinio Bianco",               ha:     0 }, // ★ Kampanien — 'Asprinio' = sauer/herb
+        { name: "Bariadorgia",                   ha:     0 }, // Sardinien — Lokalsorte
+        { name: "Bellone",                       ha:     0 }, // ★ Latium — 'Bellone' = großes Schönes
+        { name: "Bervedino",                     ha:     0 }, // Emilia-Romagna — seltene Sorte
+        { name: "Biancame",                      ha:     0 }, // ★★ Emilia-Romagna — 'Biancame' → weiß ✓
+        { name: "Bianchetta Genovese",           ha:     0 }, // ★★ Ligurien — 'Bianchetta' = kleines Weißes ✓
+        { name: "Bianchetta Trevigiana",         ha:     0 }, // ★★ Venetien — 'Bianchetta' = kleines Weißes ✓
+        { name: "Biancolella",                   ha:     0 }, // ★★ Kampanien — 'Bianco' = weiß ✓
+        { name: "Biancone di Portoferraio",      ha:     0 }, // ★★ Toskana — 'Biancone' = großes Weißes ✓
+        { name: "Catalanesca bianca",            ha:     0 }, // ★ Kampanien — geographischer Name
+        { name: "Catarratto Bianco comune",      ha:     0 }, // ★★ Sizilien — 'Carignan' kennt man als ROT... warte, andere Sorte
+        { name: "Cividin",                       ha:     0 }, // Friaul — seltene Sorte
+        { name: "Clairette Blanche",             ha:     0 }, // ★★ in IT zugelassen — 'Clairette' klingt neutral
+        { name: "Cococciola",                    ha:     0 }, // ★ Abruzzen, Apulien — ungewöhnlicher Name
+        { name: "Damaschino",                    ha:     0 }, // ★ Sizilien — 'Damaszener', klingt exotisch
+        { name: "Flavis",                        ha:     0 }, // Venetien — seltene Sorte
+        { name: "Forastera",                     ha:     0 }, // ★ Kampanien, Sardinien — 'Fremde'
+        { name: "Francavilla",                   ha:     0 }, // ★ Apulien — Stadtname als Rebname
+        { name: "Ginestra",                      ha:     0 }, // ★ Kampanien — 'Ginster' (Pflanze)
+        { name: "Greco Bianco di Novara",        ha:     0 }, // ★★ Piemont — 'Greco' → Weißwein ✓, selten
+        { name: "Guardavalle",                   ha:     0 }, // Kalabrien — geographischer Name
+        { name: "Impigno",                       ha:     0 }, // ★ Apulien — 'impigno' = träge
+        { name: "Invernega",                     ha:     0 }, // ★ Lombardei — 'Invernega' = winterlich
+        { name: "Livornese Bianca",              ha:     0 }, // ★★ Toskana — 'Livorno' = Stadt, BIANCA ✓
+        { name: "Lumassina",                     ha:     0 }, // ★ Ligurien — 'Lumacina' = Schneckchen
+        { name: "Maceratino",                    ha:     0 }, // ★ Marken — Stadtname Macerata
+        { name: "Malvasia Bianca di Basilicata", ha:     0 }, // ★★ Basilikata — 'Malvasia' weiß ✓
+        { name: "Malvasia Bianca Lunga",         ha:     0 }, // ★★ Toskana — 'Bianca Lunga' = lange weiße
+        { name: "Malvasia di Candia Aromatica",  ha:     0 }, // ★★ Emilia-Romagna — 'Malvasia' weiß ✓
+        { name: "Malvasia di Sardegna",          ha:     0 }, // ★★ Sardinien — 'Malvasia' weiß ✓
+        { name: "Mantonico bianco",              ha:     0 }, // ★ Kalabrien, Sizilien — klingt neutral
+        { name: "Marsanne",                      ha:     0 }, // Rhône-Sorte, auch in IT zugelassen
+        { name: "Minnella Bianca",               ha:     0 }, // ★★ Sizilien — 'Minnella' klingt neutral, BIANCA ✓
+        { name: "Montonico Bianco",              ha:     0 }, // ★ Abruzzen, Marken — klingt neutral
+        { name: "Montù",                         ha:     0 }, // ★ Emilia-Romagna — kurzer Name
+        { name: "Moscatellone Bianco",           ha:     0 }, // ★★ Kampanien — großer Muscat, BIANCO ✓
+        { name: "Moscatello Selvatico",          ha:     0 }, // ★★ Apulien — wilder Muskat, klingt weiß
+        { name: "Nasco",                         ha:     0 }, // ★ Sardinien — 'Nasco' klingt neutral
+        { name: "Perera",                        ha:     0 }, // ★ Venetien — 'Birnbaum'
+        { name: "Picolit Bianco",                ha:     0 }, // ★★ Friaul — 'Picolit' klingt neutral, BIANCO ✓
+        { name: "Pinella",                       ha:     0 }, // ★ Friaul — 'kleine Pinot'?
+        { name: "Pinello",                       ha:     0 }, // ★ Venetien — klingt wie 'kleiner Pinot'
+        { name: "Procanico",                     ha:     0 }, // ★ Umbrien — = Trebbiano Toscano, Lokalname
+        { name: "Retagliado bianco",             ha:     0 }, // ★★ Sardinien — 'Retagliado' klingt neutral
+        { name: "Riesling italico",              ha:     0 }, // ★★ — 'Riesling' klingt deutsch, hier = Welschriesling
+        { name: "Rollo",                         ha:     0 }, // ★ Ligurien — kurzer Name
+        { name: "Roscetto",                      ha:     0 }, // ★★ Latium — 'Roscetto' klingt rötlich — ist WEISS!
+        { name: "Saorin",                        ha:     0 }, // Venetien — seltene Sorte
+        { name: "Sciaglin",                      ha:     0 }, // ★ Friaul — rätoromanischer Name
+        { name: "Semidano",                      ha:     0 }, // ★ Sardinien — 'Semidano' klingt neutral
+        { name: "Torbato",                       ha:     0 }, // ★ Sardinien — 'Torbato' = torfig?
+        { name: "Trebbiano di Soave",            ha:     0 }, // ★★ Venetien — 'Trebbiano' weiß ✓, Soave = bekannt
+        { name: "Trebbiano Giallo",              ha:     0 }, // ★★ Latium — 'Giallo' = gelb, WEISS ✓
+        { name: "Trebbiano Romagnolo",           ha:     0 }, // ★★ Emilia-Romagna — 'Trebbiano' weiß ✓
+        { name: "Trebbiano Spoletino",           ha:     0 }, // ★★ Umbrien — 'Trebbiano' weiß ✓
+        { name: "Ucelùt",                        ha:     0 }, // ★ Friaul — 'Vögelchen' im Dialekt
+        { name: "Veltliner",                     ha:     0 }, // Abruzzen — lokale Bezeichnung
+        { name: "Verdello",                      ha:     0 }, // ★★ Umbrien — 'Verdello' = grünlich, WEISS ✓
+        { name: "Verdiso",                       ha:     0 }, // ★★ Venetien — 'Verdiso' = grünlich, WEISS ✓
+        { name: "Verduzzo Trevigiano",           ha:     0 }, // Venetien — Variante des Verduzzo Friulano
+        { name: "Vernaccia",                     ha:     0 }, // ★ Sardinien — = Vernaccia di Oristano (oxidativ)
     ],
 };
