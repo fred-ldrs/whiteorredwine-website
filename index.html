@@ -51,14 +51,14 @@
 
                 <!-- Category selector -->
                 <div class="cat-switcher" id="cat-switcher">
-                    <button class="cat-btn active" data-cat="de-approved" id="cat-btn-de-approved"></button>
+                    <button class="cat-btn active" data-cat="classic"     id="cat-btn-classic"></button>
+                    <button class="cat-btn"        data-cat="de-approved" id="cat-btn-de-approved"></button>
                     <button class="cat-btn"        data-cat="fr-approved" id="cat-btn-fr-approved"></button>
                     <button class="cat-btn"        data-cat="it-approved" id="cat-btn-it-approved"></button>
-                    <button class="cat-btn"        data-cat="classic"     id="cat-btn-classic"></button>
                 </div>
 
-                <!-- Difficulty selector -->
-                <div class="diff-switcher" id="diff-switcher">
+                <!-- Difficulty selector (hidden for Klassiker) -->
+                <div class="diff-switcher" id="diff-switcher" hidden>
                     <button class="diff-btn active" data-diff="normal" id="diff-btn-normal"></button>
                     <button class="diff-btn"        data-diff="hard"   id="diff-btn-hard"></button>
                     <button class="diff-btn"        data-diff="expert" id="diff-btn-expert"></button>
@@ -125,7 +125,7 @@
 
         // ── i18n ──────────────────────────────────────────────────────────────
         let currentLang = 'en';
-        let currentCategory = 'de-approved';
+        let currentCategory = 'classic';
         let currentDifficulty = 'normal'; // 'normal' | 'hard' | 'expert' | 'all'
         const t = () => TRANSLATIONS[currentLang];
 
@@ -191,12 +191,7 @@
             currentCategory = cat;
             document.querySelectorAll('.cat-btn').forEach(btn =>
                 btn.classList.toggle('active', btn.dataset.cat === cat));
-            // Reset to Normal when switching to Classic (no ha=0 entries there)
-            if (cat === 'classic' && currentDifficulty === 'expert') {
-                currentDifficulty = 'normal';
-                document.querySelectorAll('.diff-btn').forEach(b =>
-                    b.classList.toggle('active', b.dataset.diff === 'normal'));
-            }
+            document.getElementById('diff-switcher').hidden = (cat === 'classic');
             startQuiz();
         }
 
