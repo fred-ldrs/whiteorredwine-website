@@ -16,6 +16,51 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" href="fonts/Inter-Latin.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="style.css">
+
+    <!-- hreflang: multilingual single-page app -->
+    <link rel="alternate" hreflang="en"        href="https://whiteorredwine.com/" />
+    <link rel="alternate" hreflang="de"        href="https://whiteorredwine.com/" />
+    <link rel="alternate" hreflang="fr"        href="https://whiteorredwine.com/" />
+    <link rel="alternate" hreflang="x-default" href="https://whiteorredwine.com/" />
+
+    <!-- Open Graph: extended -->
+    <meta property="og:locale"           content="en_US" />
+    <meta property="og:locale:alternate" content="de_DE" />
+    <meta property="og:locale:alternate" content="fr_FR" />
+    <meta property="og:site_name"        content="whiteorredwine.com" />
+
+    <!-- Twitter / X Card -->
+    <meta name="twitter:card"        content="summary" />
+    <meta name="twitter:title"       content="White or Red Wine? – Free Wine Tasting Quiz" />
+    <meta name="twitter:description" content="Gewürztraminer. Primitivo. Viognier. Tannat. Can you tell which grape makes white wine and which makes red? Play free — no sign-up." />
+
+    <!-- Theme colour (browser chrome) -->
+    <meta name="theme-color" content="#09040b" />
+
+    <!-- Structured data: WebApplication -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "White or Red Wine?",
+        "alternateName": ["Weißwein oder Rotwein?", "Blanc ou Rouge ?"],
+        "description": "A free quiz where you guess whether a grape variety produces white or red wine. Covers French, German, Italian and international varieties.",
+        "url": "https://whiteorredwine.com/",
+        "applicationCategory": "EntertainmentApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "inLanguage": ["en", "de", "fr"],
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "EUR"
+        },
+        "author": {
+            "@type": "Person",
+            "url": "https://lueders.app"
+        }
+    }
+    </script>
 </head>
 <body>
 
@@ -42,6 +87,18 @@
             <div class="container">
                 <h1 id="intro-h1"></h1>
                 <p id="intro-para"></p>
+            </div>
+        </section>
+
+        <!-- ── Europe Wine Map ──────────────────────────────────── -->
+        <section class="map-section">
+            <div class="container container--wide">
+                <h2 class="map-title" id="map-title"></h2>
+                <p class="map-subtitle" id="map-subtitle"></p>
+                <div class="map-wrapper">
+                    <svg id="europe-map" role="img" aria-label="Interactive map of European wine regions"></svg>
+                    <div class="map-tooltip" id="map-tooltip" hidden></div>
+                </div>
             </div>
         </section>
 
@@ -122,6 +179,9 @@
     <script src="wines_french.js"></script>
     <script src="wines_italian.js"></script>
     <script src="wines.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
+    <script src="map.js"></script>
     <script>
 
         // ── i18n ──────────────────────────────────────────────────────────────
@@ -181,6 +241,8 @@
             document.getElementById('cat-btn-it-approved').textContent   = t().catItApproved;
             document.getElementById('cat-btn-classic').textContent       = t().catClassic;
             document.getElementById('cat-btn-world-approved').textContent = t().catWorldApproved;
+            document.getElementById('map-title').textContent    = t().mapTitle;
+            document.getElementById('map-subtitle').textContent = t().mapSubtitle;
             document.getElementById('diff-btn-all').textContent    = t().diffAll;
             document.getElementById('diff-btn-normal').textContent = t().diffNormal;
             document.getElementById('diff-btn-hard').textContent   = t().diffHard;

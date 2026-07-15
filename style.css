@@ -464,6 +464,91 @@ footer {
 footer a { color: var(--muted); }
 footer a:hover { color: var(--amber); }
 
+/* ── Europe Wine Map ────────────────────────────── */
+.container--wide {
+    width: 92%;
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 0 16px;
+}
+.map-section {
+    padding: 44px 0 52px;
+    border-top: 1px solid var(--card-line);
+}
+.map-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 1.9rem;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    text-align: center;
+    margin-bottom: 6px;
+    color: var(--ruby-text);
+}
+.map-subtitle {
+    font-size: 0.78rem;
+    color: var(--muted);
+    text-align: center;
+    margin-bottom: 28px;
+    letter-spacing: 0.06em;
+}
+.map-wrapper {
+    position: relative;
+    background: var(--darker-bg);
+    border: 1px solid var(--card-line);
+    border-radius: 10px;
+    overflow: hidden;
+    line-height: 0;
+}
+.map-wrapper svg { display: block; width: 100%; }
+
+/* Country path defaults */
+.eu-country {
+    fill: #1a0d1f;
+    stroke: #2c1018;
+    stroke-width: 0.6px;
+    cursor: default;
+    transition: fill 0.18s;
+}
+/* Wine countries: France, Germany, Italy */
+.eu-country--wine {
+    fill: rgba(140, 28, 42, 0.28);
+    stroke: rgba(140, 28, 42, 0.60);
+    stroke-width: 0.8px;
+    cursor: pointer;
+}
+.eu-country--wine:hover,
+.eu-country--wine.eu-country--hover {
+    fill: rgba(184, 148, 58, 0.32);
+    stroke: var(--amber);
+    stroke-width: 1.2px;
+}
+/* Shared borders overlay */
+.eu-borders {
+    fill: none;
+    stroke: rgba(44, 16, 24, 0.65);
+    stroke-width: 0.4px;
+    pointer-events: none;
+}
+/* Hover tooltip */
+.map-tooltip {
+    position: absolute;
+    background: var(--card-bg);
+    border: 1px solid rgba(184, 148, 58, 0.55);
+    color: var(--amber);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.69rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border-radius: 3px;
+    pointer-events: none;
+    white-space: nowrap;
+    z-index: 10;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.45);
+}
+
 /* ── Responsive ─────────────────────────────────── */
 @media (max-width: 480px) {
     .intro h1     { font-size: 2.8rem; }
