@@ -51,10 +51,11 @@
 
                 <!-- Category selector -->
                 <div class="cat-switcher" id="cat-switcher">
-                    <button class="cat-btn active" data-cat="classic"     id="cat-btn-classic"></button>
-                    <button class="cat-btn"        data-cat="de-approved" id="cat-btn-de-approved"></button>
-                    <button class="cat-btn"        data-cat="fr-approved" id="cat-btn-fr-approved"></button>
-                    <button class="cat-btn"        data-cat="it-approved" id="cat-btn-it-approved"></button>
+                    <button class="cat-btn active" data-cat="classic"       id="cat-btn-classic"></button>
+                    <button class="cat-btn"        data-cat="de-approved"   id="cat-btn-de-approved"></button>
+                    <button class="cat-btn"        data-cat="fr-approved"   id="cat-btn-fr-approved"></button>
+                    <button class="cat-btn"        data-cat="it-approved"   id="cat-btn-it-approved"></button>
+                    <button class="cat-btn"        data-cat="world-approved" id="cat-btn-world-approved"></button>
                 </div>
 
                 <!-- Difficulty selector (hidden for Klassiker) -->
@@ -175,10 +176,11 @@
             document.getElementById('privacy-link').textContent      = t().privacyLink;
             document.getElementById('made-by').textContent           = t().madeBy;
 
-            document.getElementById('cat-btn-de-approved').textContent = t().catDeApproved;
-            document.getElementById('cat-btn-fr-approved').textContent = t().catFrApproved;
-            document.getElementById('cat-btn-it-approved').textContent = t().catItApproved;
-            document.getElementById('cat-btn-classic').textContent     = t().catClassic;
+            document.getElementById('cat-btn-de-approved').textContent   = t().catDeApproved;
+            document.getElementById('cat-btn-fr-approved').textContent   = t().catFrApproved;
+            document.getElementById('cat-btn-it-approved').textContent   = t().catItApproved;
+            document.getElementById('cat-btn-classic').textContent       = t().catClassic;
+            document.getElementById('cat-btn-world-approved').textContent = t().catWorldApproved;
             document.getElementById('diff-btn-all').textContent    = t().diffAll;
             document.getElementById('diff-btn-normal').textContent = t().diffNormal;
             document.getElementById('diff-btn-hard').textContent   = t().diffHard;
@@ -206,7 +208,7 @@
         }
 
         function buildClassicPool() {
-            const TOP = 10;
+            const TOP = 5;
             const topN = arr => [...arr]
                 .filter(v => v.ha > 0)
                 .sort((a, b) => b.ha - a.ha)
@@ -223,10 +225,24 @@
             };
         }
 
+        function buildWorldPool() {
+            const merge = arrays => {
+                const seen = new Set(), out = [];
+                for (const v of arrays.flat())
+                    if (!seen.has(v.name)) { seen.add(v.name); out.push(v); }
+                return out;
+            };
+            return {
+                white: merge([DE_APPROVED.white, FR_APPROVED.white, IT_APPROVED.white]),
+                red:   merge([DE_APPROVED.red,   FR_APPROVED.red,   IT_APPROVED.red]),
+            };
+        }
+
         function getPool() {
-            if (currentCategory === 'de-approved') return DE_APPROVED;
-            if (currentCategory === 'fr-approved') return FR_APPROVED;
-            if (currentCategory === 'it-approved') return IT_APPROVED;
+            if (currentCategory === 'de-approved')    return DE_APPROVED;
+            if (currentCategory === 'fr-approved')    return FR_APPROVED;
+            if (currentCategory === 'it-approved')    return IT_APPROVED;
+            if (currentCategory === 'world-approved') return buildWorldPool();
             return buildClassicPool();
         }
 
