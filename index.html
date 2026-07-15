@@ -57,12 +57,12 @@
                     <button class="cat-btn"        data-cat="classic"     id="cat-btn-classic"></button>
                 </div>
 
-                <!-- Difficulty selector (country pools only) -->
+                <!-- Difficulty selector -->
                 <div class="diff-switcher" id="diff-switcher">
-                    <button class="diff-btn active" data-diff="all"    id="diff-btn-all"></button>
-                    <button class="diff-btn"        data-diff="normal" id="diff-btn-normal"></button>
+                    <button class="diff-btn active" data-diff="normal" id="diff-btn-normal"></button>
                     <button class="diff-btn"        data-diff="hard"   id="diff-btn-hard"></button>
                     <button class="diff-btn"        data-diff="expert" id="diff-btn-expert"></button>
+                    <button class="diff-btn"        data-diff="all"    id="diff-btn-all"></button>
                 </div>
 
                 <!-- Question screen -->
@@ -126,7 +126,7 @@
         // ── i18n ──────────────────────────────────────────────────────────────
         let currentLang = 'en';
         let currentCategory = 'de-approved';
-        let currentDifficulty = 'all'; // 'all' | 'normal' | 'expert'
+        let currentDifficulty = 'normal'; // 'normal' | 'hard' | 'expert' | 'all'
         const t = () => TRANSLATIONS[currentLang];
 
         function detectLanguage() {
@@ -191,12 +191,11 @@
             currentCategory = cat;
             document.querySelectorAll('.cat-btn').forEach(btn =>
                 btn.classList.toggle('active', btn.dataset.cat === cat));
-            const isClassic = (cat === 'classic');
-            document.getElementById('diff-switcher').hidden = isClassic;
-            if (isClassic) {
-                currentDifficulty = 'all';
+            // Reset to Normal when switching to Classic (no ha=0 entries there)
+            if (cat === 'classic' && currentDifficulty === 'expert') {
+                currentDifficulty = 'normal';
                 document.querySelectorAll('.diff-btn').forEach(b =>
-                    b.classList.toggle('active', b.dataset.diff === 'all'));
+                    b.classList.toggle('active', b.dataset.diff === 'normal'));
             }
             startQuiz();
         }
@@ -258,9 +257,11 @@
             if (isHaPool && currentDifficulty !== 'all') {
                 const median = calcMedianHa(pool);
                 const f = (arr) => {
-                    if (currentDifficulty === 'normal') return arr.filter(v => v.ha >= median);
-                    if (currentDifficulty === 'hard')   return arr.filter(v => v.ha > 0 && v.ha < median);
-                    /* expert */                         return arr.filter(v => v.ha === 0);
+                    let result;
+                    if (currentDifficulty === 'normal')      result = arr.filter(v => v.ha >= median);
+                    else if (currentDifficulty === 'hard')   result = arr.filter(v => v.ha > 0 && v.ha < median);
+                    else                                     result = arr.filter(v => v.ha === 0);
+                    return result.length >= half ? result : arr; // fallback if pool too small
                 };
                 fw = f(pool.white);
                 fr = f(pool.red);
