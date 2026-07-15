@@ -178,6 +178,10 @@ const TRANSLATIONS = {
                 q: 'Which variety fools the most players?',
                 a: '<em>Roussanne</em> (white) and <em>Blaufränkisch</em> (red) are among the most misguessed — their names strongly suggest the opposite colour. <em>Nero d\'Avola</em> ("black of Avola"), on the other hand, is almost always identified as red.',
             },
+            {
+                q: 'What do the difficulty levels mean?',
+                a: 'Every variety in the German, French and Italian pools carries a cultivated area in hectares (ha) from official statistics (Destatis, FranceAgriMer, ISTAT). The levels are set relative to the pool\u2019s median ha: <em>Normal</em> \u2014 varieties at or above the median, the widely-planted classics everyone has heard of; <em>Hard</em> \u2014 varieties below the median but with a known figure, less common but still tracked; <em>Expert</em> \u2014 only varieties with no recorded area (ha\u00a0=\u00a00), the rarest and most obscure names in the pool. The <em>Classic</em> mode takes the top\u00a010 most-planted white and red varieties from each of the three countries and merges them into a cross-country greatest-hits of the vine.',
+            },
         ],
         catDeApproved:  'German Wines',
         catFrApproved:  'French Wines',
@@ -187,6 +191,10 @@ const TRANSLATIONS = {
         imprintLink:    'Imprint',
         privacyLink:    'Privacy Policy',
         madeBy:         'Made by',
+        diffAll:        'All',
+        diffNormal:     'Normal',
+        diffHard:       'Hard',
+        diffExpert:     'Expert',
     },
 
     de: {
@@ -231,6 +239,10 @@ const TRANSLATIONS = {
                 q: 'Welche Rebsorte täuscht die meisten Spieler?',
                 a: '<em>Roussanne</em> (Weiß) und <em>Blaufränkisch</em> (Rot) werden am häufigsten falsch geraten — ihre Namen legen die entgegengesetzte Farbe nahe. <em>Nero d\'Avola</em> („Schwarzer von Avola") hingegen wird fast immer korrekt als Rotweinsorte erkannt.',
             },
+            {
+                q: 'Was bedeuten die Schwierigkeitsgrade?',
+                a: 'Jede Rebsorte in den deutschen, französischen und italienischen Pools trägt eine Anbaufläche (ha) aus offiziellen Statistiken (Destatis, FranceAgriMer, ISTAT). Die Stufen werden dynamisch aus dem Median der Anbauflächen berechnet: <em>Normal</em> \u2014 Sorten ab dem Median aufwärts, die meistangebauten und allgemein bekannten Klassiker; <em>Schwer</em> \u2014 Sorten unterhalb des Medians mit bekannter Fläche, seltener aber statistisch erfasst; <em>Experte</em> \u2014 nur Sorten ohne erfasste Anbaufläche (ha\u00a0=\u00a00), die unbekanntesten Namen des jeweiligen Pools. Der <em>Klassisch</em>-Modus zieht die jeweils 10 meistangebauten Weiß- und Rotsorten aus allen drei Ländern und kombiniert sie zu einem länderübergreifenden Pool der bekanntesten Rebsorten der Welt.',
+            },
         ],
         catDeApproved:  'Deutsche Weine',
         catFrApproved:  'Französische Weine',
@@ -240,6 +252,10 @@ const TRANSLATIONS = {
         imprintLink:    'Impressum',
         privacyLink:    'Datenschutz',
         madeBy:         'Erstellt von',
+        diffAll:        'Alle',
+        diffNormal:     'Normal',
+        diffHard:       'Schwer',
+        diffExpert:     'Experte',
     },
 
     fr: {
@@ -284,6 +300,10 @@ const TRANSLATIONS = {
                 q: 'Quel cépage trompe le plus de joueurs\u00a0?',
                 a: '<em>Roussanne</em> (blanc) et <em>Blaufränkisch</em> (rouge) sont parmi les plus mal devinés — leurs noms suggèrent fortement la couleur opposée. En revanche, <em>Nero d\'Avola</em> (« noir d\'Avola ») est presque toujours identifié comme rouge\u00a0!',
             },
+            {
+                q: 'Que signifient les niveaux de difficulté\u00a0?',
+                a: 'Chaque cépage des pools allemand, français et italien est associé à une superficie cultivée (ha) issue de statistiques officielles (Destatis, FranceAgriMer, ISTAT). Les niveaux sont calculés à partir de la médiane des superficies\u00a0: <em>Normal</em> \u2014 cépages au-dessus ou à la médiane, les grands classiques les plus cultivés\u00a0; <em>Difficile</em> \u2014 cépages sous la médiane mais avec des données connues, moins répandus mais recensés\u00a0; <em>Expert</em> \u2014 uniquement les cépages sans superficie enregistrée (ha\u00a0=\u00a00), les noms les plus rares et obscurs du pool. Le mode <em>Classique</em> sélectionne les 10 cépages blancs et rouges les plus cultivés dans chacun des trois pays et les réunit en un pool transnational des cépages les plus emblématiques.',
+            },
         ],
         catDeApproved:  'Vins Allemands',
         catFrApproved:  'Vins Français',
@@ -293,5 +313,9 @@ const TRANSLATIONS = {
         imprintLink:    'Mentions légales',
         privacyLink:    'Politique de confidentialité',
         madeBy:         'Créé par',
+        diffAll:        'Tous',
+        diffNormal:     'Normal',
+        diffHard:       'Difficile',
+        diffExpert:     'Expert',
     },
 };

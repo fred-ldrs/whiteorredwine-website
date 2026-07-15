@@ -57,6 +57,14 @@
                     <button class="cat-btn"        data-cat="classic"     id="cat-btn-classic"></button>
                 </div>
 
+                <!-- Difficulty selector (country pools only) -->
+                <div class="diff-switcher" id="diff-switcher">
+                    <button class="diff-btn active" data-diff="all"    id="diff-btn-all"></button>
+                    <button class="diff-btn"        data-diff="normal" id="diff-btn-normal"></button>
+                    <button class="diff-btn"        data-diff="hard"   id="diff-btn-hard"></button>
+                    <button class="diff-btn"        data-diff="expert" id="diff-btn-expert"></button>
+                </div>
+
                 <!-- Question screen -->
                 <div id="quiz-screen">
                     <p class="quiz-progress-label">
@@ -118,6 +126,7 @@
         // ── i18n ──────────────────────────────────────────────────────────────
         let currentLang = 'en';
         let currentCategory = 'de-approved';
+        let currentDifficulty = 'all'; // 'all' | 'normal' | 'expert'
         const t = () => TRANSLATIONS[currentLang];
 
         function detectLanguage() {
@@ -170,6 +179,10 @@
             document.getElementById('cat-btn-fr-approved').textContent = t().catFrApproved;
             document.getElementById('cat-btn-it-approved').textContent = t().catItApproved;
             document.getElementById('cat-btn-classic').textContent     = t().catClassic;
+            document.getElementById('diff-btn-all').textContent    = t().diffAll;
+            document.getElementById('diff-btn-normal').textContent = t().diffNormal;
+            document.getElementById('diff-btn-hard').textContent   = t().diffHard;
+            document.getElementById('diff-btn-expert').textContent = t().diffExpert;
             renderFAQ();
             startQuiz();
         }
@@ -178,6 +191,13 @@
             currentCategory = cat;
             document.querySelectorAll('.cat-btn').forEach(btn =>
                 btn.classList.toggle('active', btn.dataset.cat === cat));
+            const isClassic = (cat === 'classic');
+            document.getElementById('diff-switcher').hidden = isClassic;
+            if (isClassic) {
+                currentDifficulty = 'all';
+                document.querySelectorAll('.diff-btn').forEach(b =>
+                    b.classList.toggle('active', b.dataset.diff === 'all'));
+            }
             startQuiz();
         }
 
@@ -191,18 +211,64 @@
             return a;
         }
 
+        function buildClassicPool() {
+            const TOP = 10;
+            const topN = arr => [...arr]
+                .filter(v => v.ha > 0)
+                .sort((a, b) => b.ha - a.ha)
+                .slice(0, TOP);
+            const merge = arrays => {
+                const seen = new Set(), out = [];
+                for (const v of arrays.flat())
+                    if (!seen.has(v.name)) { seen.add(v.name); out.push(v); }
+                return out;
+            };
+            return {
+                white: merge([topN(DE_APPROVED.white), topN(FR_APPROVED.white), topN(IT_APPROVED.white)]),
+                red:   merge([topN(DE_APPROVED.red),   topN(FR_APPROVED.red),   topN(IT_APPROVED.red)]),
+            };
+        }
+
         function getPool() {
             if (currentCategory === 'de-approved') return DE_APPROVED;
             if (currentCategory === 'fr-approved') return FR_APPROVED;
             if (currentCategory === 'it-approved') return IT_APPROVED;
-            return WINE_POOLS[currentLang];
+            return buildClassicPool();
+        }
+
+        function calcMedianHa(pool) {
+            const vals = [...pool.white, ...pool.red]
+                .filter(v => typeof v === 'object')
+                .map(v => v.ha)
+                .filter(ha => ha > 0)
+                .sort((a, b) => a - b);
+            if (!vals.length) return 0;
+            const mid = Math.floor(vals.length / 2);
+            return vals.length % 2 === 0 ? (vals[mid - 1] + vals[mid]) / 2 : vals[mid];
         }
 
         function generateQuiz(count) {
             const half = count / 2;
             const pool = getPool();
-            const whites = shuffle(pool.white).slice(0, half).map(n => ({ name: n, type: 'white' }));
-            const reds   = shuffle(pool.red).slice(0, half).map(n   => ({ name: n, type: 'red'   }));
+            const isHaPool = pool.white.length > 0 && typeof pool.white[0] === 'object';
+
+            let fw = pool.white;
+            let fr = pool.red;
+
+            if (isHaPool && currentDifficulty !== 'all') {
+                const median = calcMedianHa(pool);
+                const f = (arr) => {
+                    if (currentDifficulty === 'normal') return arr.filter(v => v.ha >= median);
+                    if (currentDifficulty === 'hard')   return arr.filter(v => v.ha > 0 && v.ha < median);
+                    /* expert */                         return arr.filter(v => v.ha === 0);
+                };
+                fw = f(pool.white);
+                fr = f(pool.red);
+            }
+
+            const toName = v => typeof v === 'object' ? v.name : v;
+            const whites = shuffle(fw).slice(0, half).map(v => ({ name: toName(v), type: 'white' }));
+            const reds   = shuffle(fr).slice(0, half).map(v => ({ name: toName(v), type: 'red'   }));
             return shuffle([...whites, ...reds]);
         }
 
@@ -231,7 +297,7 @@
             questions = generateQuiz(TOTAL);
             current = score = 0;
             answers = [];
-            qTotalEl.textContent = TOTAL;
+            qTotalEl.textContent = questions.length;
             resultsEl.hidden = true;
             screenEl.hidden  = false;
             showQuestion();
@@ -260,7 +326,7 @@
                 : t().wrongFeedback(q.name, typeLabel);
             feedbackEl.className = 'quiz-feedback ' + (ok ? 'quiz-feedback--correct' : 'quiz-feedback--wrong');
             current++;
-            if (current < TOTAL) setTimeout(showQuestion, 900);
+            if (current < questions.length) setTimeout(showQuestion, 900);
             else setTimeout(showResults, 1000);
         }
 
@@ -298,6 +364,14 @@
 
         document.querySelectorAll('.cat-btn').forEach(btn =>
             btn.addEventListener('click', () => setCategory(btn.dataset.cat)));
+
+        document.querySelectorAll('.diff-btn').forEach(btn =>
+            btn.addEventListener('click', () => {
+                currentDifficulty = btn.dataset.diff;
+                document.querySelectorAll('.diff-btn').forEach(b =>
+                    b.classList.toggle('active', b.dataset.diff === btn.dataset.diff));
+                startQuiz();
+            }));
 
         // ── Init ──────────────────────────────────────────────────────────────
         setLanguage(detectLanguage());

@@ -144,6 +144,24 @@ header .container {
 .cat-btn:hover  { color: var(--amber); border-color: rgba(212,168,78,0.5); }
 .cat-btn.active { color: var(--dark-bg); background: var(--amber); border-color: var(--amber); }
 
+/* ── Difficulty Switcher ─────────────────────────── */
+.diff-switcher { display: flex; gap: 6px; margin-bottom: 22px; flex-wrap: wrap; }
+.diff-btn {
+    background: transparent;
+    border: 1px solid var(--muted);
+    border-radius: 20px;
+    color: var(--muted);
+    padding: 4px 14px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    transition: color 0.2s, border-color 0.2s, background 0.2s;
+}
+.diff-btn:hover  { color: var(--amber); border-color: rgba(212,168,78,0.5); }
+.diff-btn.active { color: var(--dark-bg); background: var(--amber); border-color: var(--amber); }
+
 /* ── Colour Highlights ───────────────────────────── */
 .hl-white {
     color: var(--amber);
