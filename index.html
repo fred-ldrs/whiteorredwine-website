@@ -290,6 +290,7 @@
 
         // ── Quiz Logic ────────────────────────────────────────────────────────
         function startQuiz() {
+            document.getElementById('diff-switcher').hidden = (currentCategory === 'classic');
             questions = generateQuiz(TOTAL);
             current = score = 0;
             answers = [];
